@@ -8,16 +8,32 @@ from PIL import ImageDraw
 from PIL import ImageFont
 import os
 
-imgpath = os.path.join(os.getcwd(), 'img')
 base_img = os.path.join(os.getcwd(), 'img', 'beaker_base.png')
-if os.path.exists(imgpath) and os.path.isfile(imgpath):
-    with Image.open(imgpath) as imgfile:
-        caption = "This is a caption."
+
+if os.path.exists(base_img) and os.path.isfile(base_img):
+    with Image.open(base_img) as imgfile:
+        original = "O nome do sistema é GNU"
+        meme = "I nimi di sistimi i GNI"
+
+        # Load the image into the ImageDraw object
         draw = ImageDraw.Draw(imgfile)
-        f = ImageFont.truetype("/home/lucas/.fonts/Ubuntu.ttf", 32)
-        draw.text((4, 0), caption, font=f)
+
+        # Get the image size and set font
+        height, width = imgfile.size
+        f = ImageFont.truetype("/home/lucas/.fonts/Ubuntu.ttf", 28)
+
+        # Calculate coordinates:
+        center_width = width // 2
+
+        # Draw text according to rules (center-up and center-down)
+        draw.text((center_width, 0), original, font=f)
+        draw.text((center_width, height), meme, font=f)
+
+        # Saving the new image:
+        imgpath = os.path.join(os.getcwd(), 'img', 'new_img.png')
         imgfile.save(imgpath)
+        print("This is a {} by {} pixels image.".format(width, height))
 
 else:
-    print("Uh-oh! Directory not found!")
+    print("Uh-oh! File not found!")
     print("You're at %s. Maybe you should check that." % os.getcwd())
