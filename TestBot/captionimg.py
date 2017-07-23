@@ -20,14 +20,14 @@ if os.path.exists(base_img) and os.path.isfile(base_img):
 
         # Get the image size and set font
         height, width = imgfile.size
-        f = ImageFont.truetype("/home/lucas/.fonts/Ubuntu.ttf", 28)
+        f = ImageFont.truetype("/home/lucas/.fonts/Ubuntu.ttf", 50)
 
         # Calculate coordinates:
-        center_width = width // 2
+        center_width = (width // 2) - 5 *len(original)
 
         # Draw text according to rules (center-up and center-down)
-        draw.text((center_width, 0), original, font=f)
-        draw.text((center_width, height), meme, font=f)
+        draw.text((0, 0), original, font=f)
+        draw.text((center_width, 300), meme, font=f)
 
         # Saving the new image:
         imgpath = os.path.join(os.getcwd(), 'img', 'new_img.png')
