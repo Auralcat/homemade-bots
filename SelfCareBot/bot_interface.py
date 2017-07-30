@@ -10,6 +10,7 @@ import logging
 import self_care
 import datetime
 import time
+import os
 
 class ModelWrapper():
     """Needed to implement the periodic message function properly."""
@@ -32,8 +33,15 @@ class ModelWrapper():
                 start_time = time.time()
             time.sleep(1)
 
+def get_token(target_file):
+    """Returns the token from a text file"""
+    with open(target_file, 'r') as tokenfile:
+        content = tokenfile.read()
+
+    return content.strip()
+
 # Global vars
-TOKEN='token_goes_here'
+TOKEN=get_token("TOKEN.txt")
 MSG_INTERVAL = 3600
 
 # Setting up the updater
