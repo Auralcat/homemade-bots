@@ -19,19 +19,21 @@ class ModelWrapper():
         self.msg_func = msg_func
         self.interval = interval
 
+    # TODO: Put this function in another thread.
     def periodic_reminder(self):
         start_time = time.time()
 
+        # Initial message
+        self.msg_func(self.chat_id, self_care.get_phrase())
         # Infinite loop
         while True:
-            print("Current time: %s" % (time.time() - start_time))
             if ((time.time() - start_time) > self.interval):
                 self.msg_func(self.chat_id, self_care.get_phrase())
                 start_time = time.time()
             time.sleep(1)
 
 # Global vars
-TOKEN='324349241:AAFixmHzkAcuXpwq6spU4Vue8aboo3jMhxc'
+TOKEN='token_goes_here'
 MSG_INTERVAL = 3600
 
 # Setting up the updater
